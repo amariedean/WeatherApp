@@ -1,27 +1,18 @@
-// Weather API
 function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#current-temperature");
   let temperature = Math.round(response.data.temperature.current);
+  let currentTemperature = document.querySelector("#current-temperature");
   let cityElement = document.querySelector("#current-city");
   cityElement.innerHTML = response.data.city;
-  temperatureElement.innerHTML = temperature;
-  console.log(displayTemperature);
+  currentTemperature.innerHTML = temperature;
 }
 
-// Search Functionality
 function search(event) {
   event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
-  let city = document.querySelector("#current-city");
-  city.innerHTML = searchInput.value;
-
-  let apiKey = "2a3foafb9td8f2884233b70e0d8d2700";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
-
-  axios.get(apiUrl).then(displayTemperature);
+  let searchInputElement = document.querySelector("#search-input");
+  let cityElement = document.querySelector("#current-city");
+  cityElement.innerHTML = searchInputElement.value;
 }
 
-// Format Date & Time
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
