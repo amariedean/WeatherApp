@@ -1,16 +1,20 @@
 function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#current-temperature-value");
   let temperature = Math.round(response.data.temperature.current);
-  let currentTemperature = document.querySelector("#current-temperature");
   let cityElement = document.querySelector("#current-city");
   cityElement.innerHTML = response.data.city;
-  currentTemperature.innerHTML = temperature;
+  temperatureElement.innerHTML = temperature;
 }
 
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
-  let cityElement = document.querySelector("#current-city");
-  cityElement.innerHTML = searchInputElement.value;
+  let city = searchInputElement.value;
+
+  let apiKey = "d004ccdb5838b4o2t7ba06febc018037";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+
+  axios.get(apiUrl).then(displayTemperature);
 }
 
 function formatDate(date) {
